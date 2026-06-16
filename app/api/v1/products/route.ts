@@ -14,7 +14,7 @@ export async function OPTIONS() {
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const search = searchParams.get('search');
-  const idParam = searchParams.get('id'); // Simulación para pruebas por query string
+  const idParam = searchParams.get('id'); 
 
 
   if (idParam === 'inexistente') {
