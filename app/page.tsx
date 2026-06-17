@@ -62,36 +62,19 @@ export default function Home() {
           </div>
         )}
 
-        <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {products.map((product) => (
-            <div 
-              key={product.id} 
-              className="group relative bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden flex flex-col"
-            >
-              {/* Imagen Placeholder */}
-              <div className="w-full h-48 bg-gray-100 flex items-center justify-center group-hover:bg-gray-200 transition-colors">
-                <span className="text-gray-400 font-medium">Sin imagen</span>
-              </div>
-              
-              <div className="p-6 flex flex-col flex-grow">
-                <div className="flex justify-between items-start">
-                  <h3 className="text-lg font-semibold text-gray-900 leading-tight">
-                    {product.name}
-                  </h3>
-                  <span className="inline-flex items-center rounded-full bg-green-50 px-2.5 py-0.5 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-                    {product.inStock ? 'En stock' : 'Agotado'}
-                  </span>
-                </div>
-                
-                <div className="mt-4 flex items-end justify-between flex-grow">
-                  <p className="text-2xl font-bold text-indigo-600">
-                    ${product.price.toLocaleString('es-MX', { minimumFractionDigits: 2 })}
-                  </p>
-                  <button className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition-colors">
-                    Comprar
-                  </button>
-                </div>
-              </div>
+            <div key={product.id} className="border border-gray-300 p-4 rounded-md bg-white">
+              <h3 className="text-xl font-bold mb-2">{product.name}</h3>
+              <p className="text-gray-700 mb-2">
+                Precio: ${product.price.toLocaleString('es-MX', { minimumFractionDigits: 2 })}
+              </p>
+              <p className="text-sm mb-4">
+                Estado: {product.inStock ? 'Disponible' : 'Agotado'}
+              </p>
+              <button className="bg-blue-600 text-white px-4 py-2 rounded w-full hover:bg-blue-700">
+                Comprar
+              </button>
             </div>
           ))}
         </div>
