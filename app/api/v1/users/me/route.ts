@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { prisma } from '@/lib/prisma';
 
 export async function GET(request: NextRequest) {
   const authHeader = request.headers.get('authorization');
@@ -21,17 +22,23 @@ export async function GET(request: NextRequest) {
     }, { status: 200 });
   }
 
-  if (token.startsWith('client-token')) {
-    return NextResponse.json({
-      id: token.replace('client-token-', ''),
-      email: "cliente@correo.com",
-      role: "CLIENT"
-    }, { status: 200 });
+  if (token.startsWith('client-token-')) {
+    const userId = token.replace('client-token-', '');
+    try {
+      const user = await prisma.user.findUnique({
+        where: { id: userId }
+      });
+      if (user) {
+        return NextResponse.json(user, { status: 200 });
+      }
+    } catch (error) {
+      // Si el UUID es inválido o no existe
+    }
   }
 
   return NextResponse.json({
     code: "AUTH_TOKEN_MISSING_OR_INVALID",
-    message: "El token enviado no es válido.",
+    message: "El token enviado no es válido o el usuario no existe.",
     details: []
   }, { status: 401 });
 }
