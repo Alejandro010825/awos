@@ -41,7 +41,7 @@ export default function Categories() {
         {categories.map(cat => (
           <div key={cat.id} className="bg-white p-6 border rounded-lg shadow-sm">
             <h2 className="text-xl font-semibold">{cat.name}</h2>
-            <p className="text-gray-500 mt-2 text-sm">ID: {cat.id}</p>
+            <p className="text-gray-500 mt-2 text-sm">Ver productos</p>
           </div>
         ))}
       </div>
