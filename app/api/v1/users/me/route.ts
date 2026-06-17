@@ -15,11 +15,13 @@ export async function GET(request: NextRequest) {
   const token = authHeader.split(' ')[1];
 
   if (token === 'admin-token') {
-    return NextResponse.json({
-      id: "admin-uuid-1111",
-      email: "admin@tienda.com",
-      role: "ADMIN"
-    }, { status: 200 });
+    const adminUser = await prisma.user.findFirst({
+      where: { role: 'ADMIN' }
+    });
+    if (adminUser) {
+      return NextResponse.json(adminUser, { status: 200 });
+    }
+    return NextResponse.json({ error: "No admin user found in DB" }, { status: 404 });
   }
 
   if (token.startsWith('client-token-')) {
@@ -32,7 +34,7 @@ export async function GET(request: NextRequest) {
         return NextResponse.json(user, { status: 200 });
       }
     } catch (error) {
-      // Si el UUID es inválido o no existe
+      
     }
   }
 
