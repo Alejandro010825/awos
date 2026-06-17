@@ -2,6 +2,16 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 
 export async function POST(request: NextRequest) {
+  const authHeader = request.headers.get('authorization');
+  
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return NextResponse.json({
+      code: "AUTH_TOKEN_MISSING_OR_INVALID",
+      message: "Credenciales ausentes o firma de token expirada.",
+      details: [{ field: "Authorization", rule: "required_bearer_token" }]
+    }, { status: 401 });
+  }
+
   try {
     const body = await request.json();
 
