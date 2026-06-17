@@ -27,7 +27,14 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <nav className="bg-gray-800 p-4 text-white flex gap-4">
+          <a href="/" className="hover:underline">Productos</a>
+          <a href="/categories" className="hover:underline">Categorías</a>
+          <a href="/orders" className="hover:underline">Mis Órdenes</a>
+        </nav>
+        {children}
+      </body>
     </html>
   );
 }
