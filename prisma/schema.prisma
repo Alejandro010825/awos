@@ -10,7 +10,7 @@ datasource db {
 model User {
   id    String  @id @default(uuid())
   email String  @unique
-  role  String  @default("CLIENT") // Solo CLIENT o ADMIN
+  role  String  @default("CLIENT") 
   Order Order[]
 }
 
@@ -33,7 +33,7 @@ model Product {
 model Order {
   id         String      @id @default(uuid())
   customerId String
-  status     String      @default("PENDING") // PENDING, PAID, SHIPPED, CANCELLED
+  status     String      @default("PENDING") 
   total      Float
   createdAt  DateTime    @default(now())
   user       User        @relation(fields: [customerId], references: [id])

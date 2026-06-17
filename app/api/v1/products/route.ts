@@ -21,7 +21,7 @@ export async function GET(request: NextRequest) {
       }
     }, { status: 200 });
 
-  } catch {
+  } catch (err) {
     return NextResponse.json({ code: "INTERNAL_ERROR", message: "Error al cargar productos.", details: [] }, { status: 500 });
   }
 }
