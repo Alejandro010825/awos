@@ -32,7 +32,6 @@ export async function GET(
       }, { status: 404 });
     }
 
-    // Validar que el token pertenezca al dueño o sea admin (Mock)
     if (token !== 'admin-token' && token !== `client-token-${order.customerId}`) {
       return NextResponse.json({
         code: "INSUFFICIENT_PERMISSIONS",

@@ -23,10 +23,8 @@ export async function POST(request: NextRequest) {
       }, { status: 422 });
     }
 
-    // Calcula el total sumando precios (en una app real sacaríamos el precio de la BD por seguridad)
     const total = body.items.reduce((acc: number, item: any) => acc + (item.unitPrice * item.quantity), 0);
 
-    // Crea la orden junto con sus items
     const newOrder = await prisma.order.create({
       data: {
         customerId: body.customerId, // ID del cliente enviado en el payload

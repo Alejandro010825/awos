@@ -13,7 +13,6 @@ export async function GET(request: NextRequest) {
 
   const token = authHeader.split(' ')[1];
 
-  // Devuelve datos mockeados dependiendo del token para facilitar pruebas
   if (token === 'admin-token') {
     return NextResponse.json({
       id: "admin-uuid-1111",

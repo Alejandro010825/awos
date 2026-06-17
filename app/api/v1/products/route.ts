@@ -39,7 +39,6 @@ export async function POST(request: NextRequest) {
 
   const token = authHeader.split(' ')[1];
   
-  // Simple validation for mock testing Postman without real JWT
   if (token !== 'admin-token') {
     return NextResponse.json({
       code: "INSUFFICIENT_PERMISSIONS",

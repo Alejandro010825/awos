@@ -25,7 +25,6 @@ export async function PATCH(
 
     const body = await request.json();
 
-    // Validar transición de estado
     if (order.status === 'PENDING' && body.status === 'SHIPPED') {
       return NextResponse.json({
         code: "INVALID_STATE_TRANSITION",
