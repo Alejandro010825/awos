@@ -27,26 +27,6 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-  const authHeader = request.headers.get('authorization');
-  
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    return NextResponse.json({
-      code: "AUTH_TOKEN_MISSING_OR_INVALID",
-      message: "Credenciales ausentes o firma de token expirada.",
-      details: [{ field: "Authorization", rule: "required_bearer_token" }]
-    }, { status: 401 });
-  }
-
-  const token = authHeader.split(' ')[1];
-  
-  if (token !== 'admin-token') {
-    return NextResponse.json({
-      code: "INSUFFICIENT_PERMISSIONS",
-      message: "El rol vinculado al token de usuario no posee los permisos de escritura del endpoint.",
-      details: [{ field: "role", rule: "requires_admin" }]
-    }, { status: 403 });
-  }
-
   try {
     const body = await request.json();
 
